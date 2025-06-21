@@ -23,6 +23,45 @@
     .day-label { font-weight: bold; margin-top: 1.5rem; }
   </style>
 </head>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("#duvidas form");
+    const textarea = form.querySelector("textarea");
+    const button = form.querySelector("button");
+
+    // Cria área para exibir resposta
+    const respostaDiv = document.createElement("div");
+    respostaDiv.style.marginTop = "1rem";
+    respostaDiv.style.padding = "1rem";
+    respostaDiv.style.border = "1px solid #ccc";
+    respostaDiv.style.borderRadius = "6px";
+    respostaDiv.style.background = "#f9f9f9";
+    respostaDiv.innerText = "";
+    form.appendChild(respostaDiv);
+
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const pergunta = textarea.value.trim();
+      if (!pergunta) return;
+
+      respostaDiv.innerText = "⌛ Processando sua pergunta...";
+
+      try {
+        const response = await fetch("https://hook.us2.make.com/d9q7hiqhfwq8fwv1fmeqk5u72kcd3og3", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ pergunta: pergunta })
+        });
+
+        const data = await response.json();
+        respostaDiv.innerText = data.resposta || "❌ Nenhuma resposta recebida.";
+      } catch (error) {
+        respostaDiv.innerText = "❌ Ocorreu um erro ao buscar a resposta.";
+        console.error(error);
+      }
+    });
+  });
+</script>
 <body>
   <header>
     <div class="container">
