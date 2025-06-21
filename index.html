@@ -1,115 +1,174 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rota33Edu - Seu copiloto de estudos</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #fefefe;
-      color: #222;
-    }
-    header {
-      padding: 4rem 2rem;
-      text-align: center;
-      background-color: #ffffff;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .btn {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      font-size: 1rem;
-      background: #2f855a;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    section {
-      padding: 3rem 2rem;
-      max-width: 960px;
-      margin: auto;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      align-items: center;
-    }
-    .mockup {
-      max-width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
-    }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      color: #666;
-    }
-    input[type="email"] {
-      padding: 1rem;
-      font-size: 1rem;
-      width: 100%;
-      max-width: 300px;
-      margin-top: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #fefefe; color: #222; }
+    header { background: #fff; padding: 2rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    nav { text-align: center; margin: 1rem 0; }
+    nav a { margin: 0 1rem; text-decoration: none; color: #2f855a; font-weight: bold; }
+    section { padding: 3rem 2rem; max-width: 960px; margin: auto; }
+    .cta { background: #2f855a; color: white; padding: 1rem 2rem; border-radius: 8px; display: inline-block; text-decoration: none; }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: #666; background-color: #f3f3f3; }
+    .container { text-align: center; }
+    img.logo { max-width: 120px; margin-bottom: 1rem; }
+    form input, form textarea, form select, form button.add-btn { display: block; width: 100%; max-width: 500px; margin: 1rem auto; padding: 0.75rem; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; }
+    form button { padding: 0.75rem 2rem; background: #2f855a; color: #fff; border: none; border-radius: 6px; font-size: 1rem; cursor: pointer; }
+    form button.add-btn { background: #e2e8f0; color: #222; border: 1px dashed #aaa; font-weight: bold; }
+    .note { font-size: 0.9rem; color: #555; text-align: center; max-width: 500px; margin: 0 auto 2rem; }
+    .subgroup { margin-bottom: 2rem; }
+    .day-label { font-weight: bold; margin-top: 1.5rem; }
   </style>
 </head>
 <body>
+  <header>
+    <div class="container">
+      <img src="mockup-rota33edu.png" alt="Logo Rota33Edu" class="logo">
+      <h1>Rota33Edu</h1>
+      <p>Seu copiloto de estudos com IA, planos personalizados e ajuda em tempo real.</p>
+    </div>
+    <nav>
+      <a href="#plano">Plano de Estudo</a>
+      <a href="#duvidas">Tirar Dúvidas</a>
+      <a href="#historico">Histórico</a>
+    </nav>
+  </header>
 
-<header>
-  <h1>Estude com inteligência.<br/> Alcance seus objetivos com o Rota33Edu.</h1>
-  <p>Um app com IA que monta seu plano de estudos e tira suas dúvidas na hora.</p>
-  <button class="btn" onclick="document.getElementById('form').scrollIntoView({behavior: 'smooth'});">Quero testar!</button>
-</header>
+  <section id="plano">
+    <h2>✍️ Criar Meu Cronograma</h2>
+    <p>Vamos montar seu plano de estudos passo a passo:</p>
+    <form>
+      <div class="subgroup">
+        <label>1. Matérias e Datas de Prova</label>
 
-<section class="grid">
-  <div>
-    <h2>📘 Plano de Estudo Personalizado</h2>
-    <p>Você informa suas matérias, provas e rotina – a IA monta um cronograma sob medida com foco realista e revisões inteligentes.</p>
+        <div id="materias-container">
+          <div class="materia-bloco">
+            <input type="text" placeholder="Nome da Matéria">
+            <div class="datas-container">
+              <input type="date" placeholder="Data de Prova">
+            </div>
+            <button type="button" class="add-btn" onclick="addDataProva(this)">+ Adicionar outra data de prova</button>
+          </div>
+        </div>
 
-    <h2>🤖 Tire dúvidas com IA</h2>
-    <p>Não entendeu o conteúdo? Pergunte por texto ou imagem e receba explicações claras, instantâneas, no seu tempo.</p>
-  </div>
-  <div>
-    <img src="mockup-rota33edu.png" alt="Tela do aplicativo Rota33Edu com plano de estudo e tira-dúvidas com IA" class="mockup" />
-  </div>
-</section>
+        <button type="button" class="add-btn" onclick="addMateria()">+ Adicionar nova matéria</button>
+      </div>
 
-<section id="form" style="text-align:center;">
-  <h2>🚀 Garanta acesso antecipado</h2>
-  <p>Deixe seu e-mail e seja avisado no lançamento!</p>
-  <form action="https://formspree.io/f/xblyalyb" method="POST">
-    <input type="email" name="email" placeholder="Seu melhor e-mail" required />
-    <br />
-    <button class="btn" type="submit">Quero entrar na Rota33!</button>
-  </form>
-</section>
+      <div class="subgroup">
+        <label>2. Horários Disponíveis por Dia</label>
+        <div id="disponibilidade-container">
+          <div>
+            <span class="day-label">Segunda-feira</span>
+            <input type="text" placeholder="Ex: 14h - 16h">
+            <button type="button" class="add-btn" onclick="addHorario(this)">+ Adicionar outro horário</button>
+          </div>
+          <div>
+            <span class="day-label">Terça-feira</span>
+            <input type="text" placeholder="">
+            <button type="button" class="add-btn" onclick="addHorario(this)">+ Adicionar outro horário</button>
+          </div>
+          <div>
+            <span class="day-label">Quarta-feira</span>
+            <input type="text" placeholder="">
+            <button type="button" class="add-btn" onclick="addHorario(this)">+ Adicionar outro horário</button>
+          </div>
+          <div>
+            <span class="day-label">Quinta-feira</span>
+            <input type="text" placeholder="">
+            <button type="button" class="add-btn" onclick="addHorario(this)">+ Adicionar outro horário</button>
+          </div>
+          <div>
+            <span class="day-label">Sexta-feira</span>
+            <input type="text" placeholder="">
+            <button type="button" class="add-btn" onclick="addHorario(this)">+ Adicionar outro horário</button>
+          </div>
+          <div>
+            <span class="day-label">Sábado</span>
+            <input type="text" placeholder="">
+            <button type="button" class="add-btn" onclick="addHorario(this)">+ Adicionar outro horário</button>
+          </div>
+          <div>
+            <span class="day-label">Domingo</span>
+            <input type="text" placeholder="">
+            <button type="button" class="add-btn" onclick="addHorario(this)">+ Adicionar outro horário</button>
+          </div>
+        </div>
+      </div>
 
-<footer>
-  &copy; 2025 Rota33Edu – Todos os direitos reservados.
-</footer>
+      <button type="submit">Gerar Cronograma Inteligente</button>
+    </form>
+    <p class="note">Adicione suas matérias com datas de prova e seus horários livres. O Rota33Edu vai montar um plano perfeito pra você.</p>
+  </section>
 
-<script>
-  document.querySelector("form").addEventListener("submit", function () {
-    alert("Obrigado por se inscrever! Você será avisado no lançamento.");
-  });
-</script>
+  <section id="duvidas">
+    <h2>🤖 Tirar Dúvida com IA</h2>
+    <p>Digite sua dúvida abaixo e nossa IA responderá com explicações claras e objetivas.</p>
+    <form>
+      <textarea rows="4" placeholder="Digite sua dúvida aqui..."></textarea>
+      <button type="submit">Perguntar</button>
+    </form>
+  </section>
 
+  <section id="historico">
+    <h2>📈 Meu Histórico</h2>
+    <p>Acompanhe seus planos salvos e dúvidas respondidas.</p>
+    <a href="#" class="cta">Ver Progresso</a>
+  </section>
+
+  <footer>
+    &copy; 2025 Rota33Edu - Desenvolvido com foco no seu futuro. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    let materiaCount = 1;
+    function addMateria() {
+      if (materiaCount >= 10) return alert("Limite de 10 matérias atingido!");
+      const container = document.getElementById('materias-container');
+
+      const bloco = document.createElement('div');
+      bloco.className = 'materia-bloco';
+
+      const inputMat = document.createElement('input');
+      inputMat.type = 'text';
+      inputMat.placeholder = 'Nome da Matéria';
+
+      const datasDiv = document.createElement('div');
+      datasDiv.className = 'datas-container';
+      const inputDate = document.createElement('input');
+      inputDate.type = 'date';
+      datasDiv.appendChild(inputDate);
+
+      const botaoAddData = document.createElement('button');
+      botaoAddData.type = 'button';
+      botaoAddData.className = 'add-btn';
+      botaoAddData.textContent = '+ Adicionar outra data de prova';
+      botaoAddData.onclick = () => addDataProva(botaoAddData);
+
+      bloco.appendChild(inputMat);
+      bloco.appendChild(datasDiv);
+      bloco.appendChild(botaoAddData);
+      container.appendChild(bloco);
+
+      materiaCount++;
+    }
+
+    function addDataProva(button) {
+      const parent = button.previousElementSibling;
+      const newDate = document.createElement('input');
+      newDate.type = 'date';
+      parent.appendChild(newDate);
+    }
+
+    function addHorario(button) {
+      const div = button.parentNode;
+      const input = document.createElement('input');
+      input.type = 'text';
+      input.placeholder = 'Ex: 18h - 20h';
+      div.insertBefore(input, button);
+    }
+  </script>
 </body>
 </html>
